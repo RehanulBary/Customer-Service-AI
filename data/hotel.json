@@ -1,0 +1,78 @@
+{
+  "id": "shapla-grand-dhaka",
+  "name": "Shapla Grand Hotel",
+  "description": "A fictional upscale independent hotel combining contemporary Bangladeshi design with calm, attentive service in central Dhaka.",
+  "address": {
+    "street": "27 Shapla Avenue",
+    "area": "Gulshan",
+    "city": "Dhaka",
+    "country": "Bangladesh",
+    "postalCode": "1212"
+  },
+  "phone": "+880 2 5550 2840",
+  "email": "reception@shaplagrand.example",
+  "timezone": "Asia/Dhaka",
+  "currency": "BDT",
+  "checkInTime": "15:00",
+  "checkOutTime": "12:00",
+  "information": {
+    "location": "Shapla Grand is in the fictional Shapla Avenue district of Gulshan, Dhaka, about twenty minutes from Hazrat Shahjalal International Airport in light traffic.",
+    "check_in": "Check-in begins at 3:00 PM. Early check-in is subject to availability and cannot be guaranteed in advance.",
+    "check_out": "Check-out is by noon. Late check-out is subject to availability and may carry an additional charge.",
+    "parking": "Complimentary secure on-site parking is available for registered guests, subject to space.",
+    "wifi": "Complimentary high-speed Wi-Fi is available in guest rooms and public areas.",
+    "breakfast": "A buffet breakfast is served from 6:30 AM to 10:30 AM. It is included with suites and available for other rooms at 1,800 taka per adult and 900 taka per child.",
+    "restaurant": "The Lotus Table serves Bangladeshi and international dishes daily from 6:30 AM until 11:00 PM. In-room dining is available around the clock with a limited overnight menu.",
+    "airport_pickup": "Private airport pickup can be arranged with at least six hours' notice. The fictional one-way rate is 3,200 taka for a sedan or 4,800 taka for a people carrier.",
+    "pool": "The temperature-controlled rooftop pool is open daily from 7:00 AM to 9:00 PM. Children must be supervised by an adult.",
+    "gym": "The fitness studio is open twenty-four hours for registered guests and includes cardio equipment, free weights, and a stretching area.",
+    "smoking": "All guest rooms and indoor public areas are non-smoking. A designated outdoor smoking area is available on the terrace.",
+    "children": "Children are welcome. One child under six may share existing bedding at no additional room charge. Cots are complimentary subject to availability.",
+    "pets": "Only trained service animals are permitted. Other pets cannot be accommodated in this prototype hotel.",
+    "cancellation": "Reservations may be cancelled without charge until 6:00 PM, two calendar days before arrival. Later cancellations and no-shows are charged one night's room rate. Flexible exceptions require a manager.",
+    "payment": "The hotel accepts cash in Bangladeshi taka and major Visa, Mastercard, and American Express cards. This voice prototype does not collect or process payment details.",
+    "accessibility": "Step-free public access and a limited number of accessible rooms are available. Specific accessibility requirements should be confirmed with the front desk.",
+    "room_assignment": "Specific physical room numbers cannot be guaranteed before check-in. The hotel can record location and view preferences for the front desk.",
+    "visitors": "Visitors must register at reception with valid identification and follow hotel security procedures. Overnight occupancy may not exceed the booked room capacity."
+  },
+  "nearbyLandmarks": [
+    {
+      "name": "Gulshan Lake Park",
+      "distance": "1.1 km",
+      "travelTime": "about 6 minutes by car"
+    },
+    {
+      "name": "Bangladesh National Parliament",
+      "distance": "7.5 km",
+      "travelTime": "about 25 minutes by car in light traffic"
+    },
+    {
+      "name": "Hazrat Shahjalal International Airport",
+      "distance": "9.8 km",
+      "travelTime": "about 20 minutes by car in light traffic"
+    },
+    {
+      "name": "Hatirjheel",
+      "distance": "4.6 km",
+      "travelTime": "about 18 minutes by car"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Can the hotel store luggage?",
+      "answer": "Complimentary luggage storage is available for registered guests before check-in and after check-out on the same day."
+    },
+    {
+      "question": "Is a government-issued ID required?",
+      "answer": "Yes. Every adult guest must present valid government-issued photo identification at check-in."
+    },
+    {
+      "question": "Does the hotel exchange currency?",
+      "answer": "The front desk can direct guests to nearby licensed exchange services but does not exchange currency on site."
+    },
+    {
+      "question": "Can rooms be decorated for celebrations?",
+      "answer": "Simple celebration arrangements may be requested at least forty-eight hours ahead. Pricing and availability require confirmation from the front desk."
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "confirmationNumber": "SGH-18264",
+    "guestName": "Nadia Rahman",
+    "phone": "+8801711002200",
+    "email": "nadia.rahman@example.com",
+    "checkInDate": "2026-08-14",
+    "checkOutDate": "2026-08-17",
+    "adults": 2,
+    "children": 1,
+    "roomType": "family-suite",
+    "roomCount": 1,
+    "preferences": [
+      "city view",
+      "high floor"
+    ],
+    "specialRequests": [
+      "baby cot"
+    ],
+    "status": "confirmed",
+    "pricePerNight": 14500,
+    "totalAmount": 43500,
+    "currency": "BDT",
+    "createdAt": "2026-07-29T09:20:00.000Z",
+    "updatedAt": "2026-07-29T09:20:00.000Z"
+  },
+  {
+    "confirmationNumber": "SGH-41732",
+    "guestName": "Tariq Hasan",
+    "phone": "+8801812345678",
+    "checkInDate": "2026-08-15",
+    "checkOutDate": "2026-08-18",
+    "adults": 2,
+    "children": 0,
+    "roomType": "deluxe-king",
+    "roomCount": 1,
+    "preferences": [
+      "quiet room"
+    ],
+    "specialRequests": [],
+    "status": "confirmed",
+    "pricePerNight": 9500,
+    "totalAmount": 28500,
+    "currency": "BDT",
+    "createdAt": "2026-08-01T14:05:00.000Z",
+    "updatedAt": "2026-08-01T14:05:00.000Z"
+  },
+  {
+    "confirmationNumber": "SGH-53091",
+    "guestName": "Samira Chowdhury",
+    "phone": "+8801911223344",
+    "checkInDate": "2026-08-14",
+    "checkOutDate": "2026-08-16",
+    "adults": 4,
+    "children": 0,
+    "roomType": "deluxe-twin",
+    "roomCount": 2,
+    "preferences": [
+      "connecting rooms"
+    ],
+    "specialRequests": [
+      "late arrival around 10 PM"
+    ],
+    "status": "confirmed",
+    "pricePerNight": 17000,
+    "totalAmount": 34000,
+    "currency": "BDT",
+    "createdAt": "2026-08-03T06:35:00.000Z",
+    "updatedAt": "2026-08-03T06:35:00.000Z"
+  },
+  {
+    "confirmationNumber": "SGH-64018",
+    "guestName": "Imran Kabir",
+    "phone": "+8801612556677",
+    "checkInDate": "2026-08-20",
+    "checkOutDate": "2026-08-22",
+    "adults": 1,
+    "children": 0,
+    "roomType": "standard-queen",
+    "roomCount": 1,
+    "preferences": [],
+    "specialRequests": [],
+    "status": "cancelled",
+    "pricePerNight": 7200,
+    "totalAmount": 14400,
+    "currency": "BDT",
+    "createdAt": "2026-08-02T11:00:00.000Z",
+    "updatedAt": "2026-08-07T08:12:00.000Z",
+    "cancelledAt": "2026-08-07T08:12:00.000Z",
+    "cancellationReason": "Travel plans changed"
+  }
+]

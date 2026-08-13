@@ -1,0 +1,67 @@
+[
+  {
+    "id": "standard-queen",
+    "name": "Standard Queen",
+    "description": "A comfortable, quiet room with a queen bed and a compact work area.",
+    "capacity": 2,
+    "beds": "1 queen bed",
+    "pricePerNight": 7200,
+    "currency": "BDT",
+    "totalRooms": 10,
+    "amenities": ["rain shower", "work desk", "smart TV", "tea and coffee", "high-speed Wi-Fi"],
+    "viewOptions": ["courtyard", "city"],
+    "connectingAvailable": false
+  },
+  {
+    "id": "deluxe-king",
+    "name": "Deluxe King",
+    "description": "A spacious king room with a lounge chair, premium bath, and elevated city outlook.",
+    "capacity": 2,
+    "beds": "1 king bed",
+    "pricePerNight": 9500,
+    "currency": "BDT",
+    "totalRooms": 8,
+    "amenities": ["deep soaking tub", "separate rain shower", "work desk", "smart TV", "minibar", "high-speed Wi-Fi"],
+    "viewOptions": ["city", "skyline"],
+    "connectingAvailable": true
+  },
+  {
+    "id": "deluxe-twin",
+    "name": "Deluxe Twin",
+    "description": "A flexible room with two generous single beds, suited to friends or small families.",
+    "capacity": 3,
+    "beds": "2 large single beds",
+    "pricePerNight": 8500,
+    "currency": "BDT",
+    "totalRooms": 8,
+    "amenities": ["rain shower", "reading chair", "smart TV", "minibar", "high-speed Wi-Fi"],
+    "viewOptions": ["city", "courtyard"],
+    "connectingAvailable": true
+  },
+  {
+    "id": "executive-suite",
+    "name": "Executive Suite",
+    "description": "A refined suite with a separate living room and wide skyline windows.",
+    "capacity": 3,
+    "beds": "1 king bed and 1 sofa bed",
+    "pricePerNight": 12800,
+    "currency": "BDT",
+    "totalRooms": 4,
+    "amenities": ["separate living room", "executive lounge access", "breakfast included", "bathtub", "espresso machine", "high-speed Wi-Fi"],
+    "viewOptions": ["city", "skyline"],
+    "connectingAvailable": false
+  },
+  {
+    "id": "family-suite",
+    "name": "Family Suite",
+    "description": "A welcoming two-zone suite with room for families to relax together.",
+    "capacity": 4,
+    "beds": "1 king bed and 2 single beds",
+    "pricePerNight": 14500,
+    "currency": "BDT",
+    "totalRooms": 5,
+    "amenities": ["two sleeping zones", "breakfast included", "children's amenities", "bathtub", "large smart TV", "high-speed Wi-Fi"],
+    "viewOptions": ["city", "courtyard"],
+    "connectingAvailable": false
+  }
+]
