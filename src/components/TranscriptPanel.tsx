@@ -29,9 +29,22 @@ export function TranscriptPanel({ entries }: { entries: TranscriptEntry[] }) {
           </div>
         ) : (
           entries.map((entry) => (
-            <article className={`transcript-entry role-${entry.role}`} key={entry.id}>
+            <article
+              className={`transcript-entry role-${entry.role}${
+                entry.severity ? ` severity-${entry.severity}` : ""
+              }`}
+              key={entry.id}
+            >
               <div className="transcript-meta">
-                <span>{entry.role === "user" ? "You" : entry.role === "assistant" ? "Receptionist" : "System"}</span>
+                <span>
+                  {entry.role === "user"
+                    ? "You"
+                    : entry.role === "assistant"
+                      ? "Receptionist"
+                      : entry.severity === "error"
+                        ? "System · error"
+                        : "System"}
+                </span>
                 {entry.status === "in_progress" ? <i>live</i> : null}
               </div>
               <p>{entry.text}</p>

@@ -38,4 +38,16 @@ describe("realtime session acknowledgement", () => {
     expect(result?.promptLoaded).toBe(false);
     expect(result?.missingTools).toContain("create_reservation");
   });
+
+  it("ignores the bare pre-config session.updated event to avoid a race", () => {
+    // OpenAI emits `session.updated` once for the freshly-created bare session
+    // (no instructions, no tools) and again after our `session.update` carries
+    // the full prompt + tool list. We must not report missing tools against the
+    // bare event.
+    const bare = inspectSessionAcknowledgement({
+      type: "session.updated",
+      session: { tools: [], instructions: "" },
+    });
+    expect(bare).toBeNull();
+  });
 });

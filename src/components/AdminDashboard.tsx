@@ -6,6 +6,7 @@ import {
   AlertIcon,
   CalendarIcon,
   CheckIcon,
+  ChevronIcon,
   DatabaseIcon,
   RefreshIcon,
   UsersIcon,
@@ -35,6 +36,31 @@ type AgentConfiguration = {
   voice: string;
   apiKeyConfigured: boolean;
   tools: Array<{ name: string; loaded: boolean }>;
+  sessionSettings: {
+    outputModalities: string[];
+    reasoningEffort: string;
+    parallelToolCalls: boolean;
+    historyStoreAudio: boolean;
+    audio: {
+      noiseReduction: string;
+      transcriptionModel: string;
+      transcriptionLanguage: string;
+      transcriptionDelay: string;
+      turnDetection: {
+        type: string;
+        eagerness: string;
+        createResponse: boolean;
+        interruptResponse: boolean;
+      };
+    };
+  };
+  promptAnchors: Array<{ phrase: string; present: boolean }>;
+  verification: {
+    requiredToolCount: number;
+    requiredPromptVersion: string;
+    requiredModel: string[];
+    requiredOutputModalities: string[];
+  };
 };
 
 function formatDate(value: string): string {
@@ -182,16 +208,65 @@ export function AdminDashboard() {
                 {agentConfiguration.promptLoaded ? "✓" : "×"}
               </span>
               <strong>System instructions</strong>
-              <small>{agentConfiguration.promptVersion} · {agentConfiguration.instructionCharacters.toLocaleString()} characters</small>
+              <small>
+                {agentConfiguration.promptVersion} ·{" "}
+                {agentConfiguration.instructionCharacters.toLocaleString()} characters
+              </small>
             </div>
             <div>
-              <span className={agentConfiguration.tools.every((tool) => tool.loaded) ? "config-ok" : "config-bad"}>
+              <span
+                className={
+                  agentConfiguration.tools.every((tool) => tool.loaded) ? "config-ok" : "config-bad"
+                }
+              >
                 {agentConfiguration.tools.every((tool) => tool.loaded) ? "✓" : "×"}
               </span>
               <strong>Business tools</strong>
-              <small>{agentConfiguration.tools.filter((tool) => tool.loaded).length}/{agentConfiguration.tools.length} active · {agentConfiguration.model} · {agentConfiguration.voice} · key {agentConfiguration.apiKeyConfigured ? "configured" : "missing"}</small>
+              <small>
+                {agentConfiguration.tools.filter((tool) => tool.loaded).length}/
+                {agentConfiguration.tools.length} active · {agentConfiguration.model} ·{" "}
+                {agentConfiguration.voice} · key{" "}
+                {agentConfiguration.apiKeyConfigured ? "configured" : "missing"}
+              </small>
+            </div>
+            <div>
+              <span className="config-ok">✓</span>
+              <strong>Live session verification</strong>
+              <small>
+                requires {agentConfiguration.verification.requiredToolCount} tools · v
+                {agentConfiguration.verification.requiredPromptVersion.split("v").pop()} ·{" "}
+                {agentConfiguration.sessionSettings.outputModalities.join("+")} · VAD{" "}
+                {agentConfiguration.sessionSettings.audio.turnDetection.type.replace("_", " ")}
+              </small>
             </div>
           </div>
+        ) : null}
+        {agentConfiguration ? (
+          <details className="prompt-anchors">
+            <summary>
+              <span>
+                Prompt anchor phrases
+                <small>
+                  {" "}
+                  {agentConfiguration.promptAnchors.every((anchor) => anchor.present)
+                    ? `${agentConfiguration.promptAnchors.length}/${agentConfiguration.promptAnchors.length} present`
+                    : `${agentConfiguration.promptAnchors.filter((anchor) => anchor.present).length}/${agentConfiguration.promptAnchors.length} present`}
+                </small>
+              </span>
+              <ChevronIcon className="summary-chevron" />
+            </summary>
+            <ul>
+              {agentConfiguration.promptAnchors.map((anchor) => (
+                <li
+                  key={anchor.phrase}
+                  className={anchor.present ? "anchor-present" : "anchor-missing"}
+                >
+                  <span aria-hidden>{anchor.present ? "✓" : "×"}</span>
+                  <code>{anchor.phrase}</code>
+                </li>
+              ))}
+            </ul>
+          </details>
         ) : (
           <div className="table-state">Checking agent configuration…</div>
         )}

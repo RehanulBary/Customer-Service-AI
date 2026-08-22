@@ -73,12 +73,15 @@ describe("agent configuration route", () => {
       expect(payload).toMatchObject({
         ok: true,
         data: {
-          promptVersion: "shapla-receptionist-v2.1",
+          promptVersion: "shapla-receptionist-v2.3",
           promptLoaded: true,
           model: "gpt-realtime-2.1",
         },
       });
-      expect(payload.data.instructionCharacters).toBeGreaterThan(5_000);
+      expect(payload.data.instructionCharacters).toBeGreaterThan(1_500);
+      // Sanity cap: the v2.3 rewrite is intentionally tight (<5k chars).
+      // If this fails, the prompt has grown back to the long-form hedging style.
+      expect(payload.data.instructionCharacters).toBeLessThan(6_000);
       expect(payload.data.tools).toHaveLength(7);
       expect(payload.data.tools.every((tool: { loaded: boolean }) => tool.loaded)).toBe(true);
     } finally {

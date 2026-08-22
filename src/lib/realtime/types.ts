@@ -17,6 +17,7 @@ export type TranscriptEntry = {
   text: string;
   order: number;
   status?: "in_progress" | "completed" | "incomplete";
+  severity?: "info" | "warning" | "error";
 };
 
 export type ActivityKind = "success" | "info" | "tool" | "warning" | "error";

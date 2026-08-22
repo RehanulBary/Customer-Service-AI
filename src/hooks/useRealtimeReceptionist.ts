@@ -20,7 +20,7 @@ import {
 } from "@/agents/hotelPrompt";
 import type { ApiResult } from "@/lib/hotel/errors";
 import { HOTEL_TOOL_NAMES } from "@/lib/hotel/tool-names";
-import { inspectSessionAcknowledgement } from "@/lib/realtime/session-acknowledgement";
+import { inspectSessionAcknowledgement, verifyInitialSessionConfig } from "@/lib/realtime/session-acknowledgement";
 import type {
   AgentActivity,
   ActivityKind,
@@ -161,6 +161,7 @@ export function useRealtimeReceptionist() {
   const generationRef = useRef(0);
   const intentionalCloseRef = useRef(false);
   const mountedRef = useRef(true);
+  const verificationReportedRef = useRef(false);
 
   const changePhase = useCallback((next: CallPhase) => {
     phaseRef.current = next;
@@ -177,18 +178,22 @@ export function useRealtimeReceptionist() {
     setActivity((current) => [...current.slice(-79), next]);
   }, []);
 
-  const addSystemTranscript = useCallback((text: string) => {
-    setTranscript((current) => [
-      ...current,
-      {
-        id: `system-${++orderRef.current}`,
-        role: "system",
-        text,
-        order: orderRef.current,
-        status: "completed",
-      },
-    ]);
-  }, []);
+  const addSystemTranscript = useCallback(
+    (text: string, severity: TranscriptEntry["severity"] = "info") => {
+      setTranscript((current) => [
+        ...current,
+        {
+          id: `system-${++orderRef.current}`,
+          role: "system",
+          text,
+          order: orderRef.current,
+          status: "completed",
+          severity,
+        },
+      ]);
+    },
+    [],
+  );
 
   const updateTranscriptFromHistory = useCallback((history: RealtimeItem[]) => {
     setTranscript((current) => {
@@ -317,7 +322,7 @@ export function useRealtimeReceptionist() {
             ? parsed.error.message
             : "The hotel operation did not complete.";
         addActivity(`${TOOL_ACTIVITY_NAMES[toolName] ?? toolName} returned an issue`, "warning");
-        addSystemTranscript(errorMessage);
+        addSystemTranscript(`Tool error · ${errorMessage}`, "error");
         return;
       }
 
@@ -354,7 +359,8 @@ export function useRealtimeReceptionist() {
   const handleTransportEvent = useCallback(
     (event: TransportEvent) => {
       const acknowledgement = inspectSessionAcknowledgement(event);
-      if (acknowledgement) {
+      if (acknowledgement && !verificationReportedRef.current) {
+        verificationReportedRef.current = true;
         if (acknowledgement.promptLoaded) {
           addActivity(`Receptionist instructions active · ${HOTEL_AGENT_PROMPT_VERSION}`, "success");
         } else {
@@ -394,6 +400,7 @@ export function useRealtimeReceptionist() {
     escalationRef.current = null;
     callStartedAtRef.current = null;
     orderRef.current = 0;
+    verificationReportedRef.current = false;
     changePhase("connecting");
     addActivity("Requesting microphone access", "info");
 
@@ -523,22 +530,28 @@ export function useRealtimeReceptionist() {
       if (generationRef.current !== generation) return;
 
       const liveConfig = await session.getInitialSessionConfig();
-      const liveInstructions =
-        typeof liveConfig.instructions === "string" ? liveConfig.instructions : "";
-      const liveTools = liveConfig.tools ?? [];
-      const liveToolNames = liveTools.flatMap((candidate) =>
-        "name" in candidate && typeof candidate.name === "string"
-          ? [candidate.name]
-          : [],
-      );
-      const missingTools = HOTEL_TOOL_NAMES.filter(
-        (toolName) => !liveToolNames.includes(toolName),
-      );
-      if (!liveInstructions.includes(HOTEL_AGENT_PROMPT_VERSION) || missingTools.length > 0) {
+      const verification = verifyInitialSessionConfig(liveConfig);
+      if (!verification.promptLoaded) {
+        addActivity(
+          `Live session is missing the ${HOTEL_AGENT_PROMPT_VERSION} receptionist instructions`,
+          "error",
+        );
+      }
+      if (verification.missingTools.length > 0) {
+        addActivity(
+          `Live session is missing tools: ${verification.missingTools.join(", ")}`,
+          "error",
+        );
+      }
+      if (!verification.promptLoaded || verification.missingTools.length > 0) {
         throw new CallSetupError(
           "The receptionist configuration did not load completely. End the call, restart the development server, and try again.",
         );
       }
+      addActivity(
+        `Live session verified · ${verification.acknowledgedToolNames.length} tools · prompt ${HOTEL_AGENT_PROMPT_VERSION}`,
+        "success",
+      );
 
       callStartedAtRef.current = Date.now();
       setDurationSeconds(0);

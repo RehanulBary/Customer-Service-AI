@@ -32,9 +32,9 @@ describe("realtime agent configuration", () => {
     expect(config.reasoning).toEqual({ effort: "low" });
     expect(config.instructions).toContain("Shapla Grand Hotel");
     expect(config.instructions).toContain(HOTEL_AGENT_PROMPT_VERSION);
-    expect(config.instructions).toContain(
-      "CALL THE WRITE TOOL NOW AS THE NEXT ACTION IN THE SAME TURN",
-    );
+    expect(config.instructions).toMatch(/commit immediately on confirmation/i);
+    expect(config.instructions).toMatch(/do not speak first/i);
+    expect(config.instructions).toMatch(/never lie about a tool call/i);
     expect(config.tools).toHaveLength(7);
     expect(config.tools?.map((tool) => "name" in tool && tool.name)).toEqual([
       "get_hotel_information",

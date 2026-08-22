@@ -303,7 +303,7 @@ The caller transcript is a secondary realtime transcription intended for demonst
 ### The agent talks but does not call booking tools
 
 - End the current call and start a new one after any prompt or tool-code change; live Realtime sessions retain the configuration they connected with.
-- Restart `npm run dev`, then open `/admin`. **System instructions** should show the `shapla-receptionist-v2.1` version and **Business tools** should show `7/7 active`.
+- Restart `npm run dev`, then open `/admin`. **System instructions** should show the `shapla-receptionist-v2.3` version and **Business tools** should show `7/7 active`.
 - During a new call, expand **Agent Activity**. It should report that the receptionist instructions and all seven tools were acknowledged. Availability and booking actions then appear as `→ search_room_availability` and `→ create_reservation`.
 - A reservation is intentionally written only after the receptionist reads the final booking summary and the caller explicitly confirms it. After that final “yes,” `create_reservation` should run immediately.
 - If a tool event shows an issue, use its caller-safe message to correct the missing or invalid value. The full development error is available in the browser console or server log.
